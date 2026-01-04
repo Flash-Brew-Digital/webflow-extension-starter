@@ -1,0 +1,379 @@
+/* ==========================================================================
+   Base Reset
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ==========================================================================
+   Custom Properties
+   --------------------------------------------------------------------------
+   These variables complement Webflow's hosted design tokens (--font-stack,
+   --font-weight-*, --text1-3, --background1-4, --border1-2, --border-radius, etc.)
+   which are provided by Webflow's external stylesheet. The variables below
+   extend that system with consistent spacing and font-size scales.
+   ========================================================================== */
+
+:root {
+  --font-size-xs: clamp(0.75rem, 0.72rem + 0.15vw, 0.8125rem);
+  --font-size-sm: clamp(0.8125rem, 0.78rem + 0.18vw, 0.875rem);
+  --font-size-md: clamp(0.875rem, 0.84rem + 0.2vw, 0.9375rem);
+
+  --spacing-xs: clamp(0.2rem, 0.15rem + 0.15vw, 0.25rem);
+  --spacing-sm: clamp(0.4rem, 0.35rem + 0.2vw, 0.5rem);
+  --spacing-md: clamp(0.6rem, 0.55rem + 0.25vw, 0.75rem);
+  --spacing-lg: clamp(0.85rem, 0.75rem + 0.3vw, 1rem);
+  --spacing-xl: clamp(1.25rem, 1.1rem + 0.4vw, 1.5rem);
+  --spacing-2xl: clamp(1.65rem, 1.5rem + 0.5vw, 2rem);
+
+  --line-height-normal: 1.4;
+
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.2s ease;
+}
+
+/* ==========================================================================
+   Root & Document Styles
+   ========================================================================== */
+
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-stack);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-normal);
+  color: var(--text1);
+  background-color: var(--background1);
+  line-height: var(--line-height-normal);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ==========================================================================
+   Typography
+   ========================================================================== */
+
+:is(h1, h2, h3) {
+  font-weight: var(--font-weight-medium);
+  color: var(--text1);
+}
+
+p {
+  color: var(--text2);
+}
+
+small {
+  font-size: var(--font-size-xs);
+  color: var(--text3);
+}
+
+/* ==========================================================================
+   Layout
+   ========================================================================== */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  height: 100%;
+  padding: var(--spacing-lg);
+
+  &:has(.empty-state:only-child) {
+    justify-content: center;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1px solid var(--border1);
+
+  & h1 {
+    font-size: var(--font-size-md);
+  }
+}
+
+.divider {
+  height: 1px;
+  margin: 0;
+  background-color: var(--border1);
+}
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+
+:where(.btn) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-family: var(--font-stack);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.btn-primary {
+  background: var(--actionPrimaryBackground);
+  color: var(--actionPrimaryText);
+  box-shadow: var(--boxShadows-action-colored);
+
+  &:hover {
+    background: var(--actionPrimaryBackgroundHover);
+  }
+}
+
+.btn-secondary {
+  background: var(--actionSecondaryBackground);
+  color: var(--actionSecondaryText);
+  box-shadow: var(--boxShadows-action-secondary);
+
+  &:hover {
+    background: var(--actionSecondaryBackgroundHover);
+  }
+}
+
+/* Action link - Subtle Styled Link */
+.link-action {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-end;
+  gap: var(--spacing-xs);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--text2);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+
+  &:hover {
+    color: var(--blueText);
+  }
+}
+
+/* ==========================================================================
+   Form Elements
+   ========================================================================== */
+
+:where(input, textarea, select) {
+  width: 100%;
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-family: var(--font-stack);
+  font-size: var(--font-size-sm);
+  color: var(--text1);
+  background-color: var(--backgroundInput);
+  border: 1px solid var(--border1);
+  border-radius: var(--border-radius);
+  box-shadow: var(--boxShadows-input-inner);
+  outline: none;
+  transition: border-color var(--transition-fast);
+
+  &:focus {
+    border-color: var(--blueBorder);
+  }
+
+  &::placeholder {
+    color: var(--text3);
+  }
+}
+
+/* ==========================================================================
+   Cards & Panels
+   ========================================================================== */
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
+  background-color: var(--background2);
+  border: 1px solid var(--border1);
+  border-radius: var(--border-radius);
+  transition: border-color var(--transition-fast);
+
+  &:has(.loading) {
+    opacity: 0.85;
+  }
+
+  &:has(.empty-state) {
+    padding-bottom: 0;
+  }
+
+  &:has(:is(input, textarea, select):focus-within) {
+    border-color: var(--blueBorder);
+  }
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &:has(+ .card-details) {
+    margin-bottom: var(--spacing-xs);
+  }
+}
+
+.card-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-sm);
+  padding-bottom: var(--spacing-sm);
+  margin-bottom: var(--spacing-xs);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--text2);
+  border-bottom: 1px solid var(--border1);
+}
+
+.card-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.card-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-sm);
+  min-height: calc(
+    var(--font-size-xs) + var(--spacing-xs) * 2 + var(--line-height-normal) *
+      0.25rem
+  );
+
+  &:has(.code) {
+    align-items: baseline;
+  }
+}
+
+/* ==========================================================================
+   Components
+   ========================================================================== */
+
+/* Code / ID display */
+.code {
+  max-width: 60%;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  overflow: hidden;
+  font-family: monospace;
+  font-size: var(--font-size-xs);
+  color: var(--text2);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  background-color: var(--background3);
+  border-radius: var(--border-radius);
+}
+
+/* Badge */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--text2);
+  background-color: var(--background4);
+  border-radius: var(--border-radius);
+}
+
+/* Screenshot image */
+.screenshot {
+  width: 100%;
+  background-color: var(--background3);
+  border-radius: var(--border-radius);
+  aspect-ratio: auto;
+  object-fit: contain;
+}
+
+/* ==========================================================================
+   States
+   ========================================================================== */
+
+/* Loading */
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-sm) 0 var(--spacing-md) 0;
+  color: var(--text3);
+}
+
+/* Empty State */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-2xl) var(--spacing-lg);
+  color: var(--text3);
+  text-align: center;
+  background-color: var(--background2);
+  border: 1px dashed var(--border2);
+  border-radius: var(--border-radius);
+}
+
+/* Error State */
+.designer-api-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-xl) var(--spacing-lg);
+  color: var(--text3);
+  text-align: center;
+  background-color: var(--background3);
+  border-radius: var(--border-radius);
+
+  & p {
+    color: var(--text3);
+  }
+}
+
+/* ==========================================================================
+   Utilities
+   ========================================================================== */
+
+/* Status Colors */
+.text-success {
+  color: var(--greenText);
+}
+.text-warning {
+  color: var(--yellowText);
+}
+.text-error {
+  color: var(--redText);
+}
+.text-info {
+  color: var(--blueText);
+}
+
+/* Text Modifiers - Low Specificity for Easy Overrides */
+:where(.text-muted) {
+  color: var(--text3);
+}
+:where(.text-inactive) {
+  color: var(--textInactive);
+}

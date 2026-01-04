@@ -1,0 +1,6 @@
+{
+  "name": "Webflow Extension Starter",
+  "apiVersion": "2",
+  "size": "comfortable",
+  "publicDir": "dist"
+}
