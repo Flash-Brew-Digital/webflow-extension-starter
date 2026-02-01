@@ -31,7 +31,7 @@
     "concurrently": "^9.2.1",
     "oxfmt": "^0.21.0",
     "oxlint": "^1.36.0",
-    "oxlint-tsgolint": "^0.10.1",
+    "oxlint-tsgolint": "^0.11.4",
     "typescript": "^5.9.3",
     "ultracite": "7.0.7"
   },
