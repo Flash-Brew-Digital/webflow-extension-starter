@@ -24,7 +24,7 @@
   },
   "devDependencies": {
     "@rspack/cli": "^1.7.0",
-    "@rspack/core": "^1.7.0",
+    "@rspack/core": "^1.7.4",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "@webflow/designer-extension-typings": "^2.0.24",
