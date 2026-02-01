@@ -27,7 +27,7 @@
     "@rspack/core": "^1.7.0",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
-    "@webflow/designer-extension-typings": "^2.0.24",
+    "@webflow/designer-extension-typings": "^2.0.25",
     "concurrently": "^9.2.1",
     "oxfmt": "^0.21.0",
     "oxlint": "^1.36.0",
